@@ -137,7 +137,7 @@ function DriverRegisterRoute() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/wasalne">
       <Routes>
         <Route path="/" element={<RootRedirect />} />
 
