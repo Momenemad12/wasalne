@@ -1,0 +1,857 @@
+* {
+  box-sizing: border-box;
+}
+
+.driver-register-page {
+  min-height: 100vh;
+  padding-bottom: 70px;
+  font-family: "Cairo", "Tahoma", sans-serif;
+  color: #071f49;
+  background:
+    radial-gradient(circle at top right, rgba(0, 119, 255, 0.18), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(0, 213, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.driver-register-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(11, 111, 242, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 111, 242, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.driver-register-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.driver-register-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glow-one {
+  width: 280px;
+  height: 280px;
+  background: rgba(11, 111, 242, 0.24);
+  top: 90px;
+  right: -80px;
+}
+
+.glow-two {
+  width: 300px;
+  height: 300px;
+  background: rgba(0, 200, 255, 0.19);
+  bottom: 80px;
+  left: -100px;
+}
+
+.driver-register-hero,
+.driver-register-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 34px 24px 0;
+}
+
+.driver-register-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.driver-register-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dfe8f5;
+  color: #0b6ff2;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 12px 28px rgba(0, 92, 230, 0.08);
+}
+
+.driver-register-content h1 {
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.15;
+  margin: 18px 0 12px;
+  color: #071f49;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.driver-register-content p {
+  margin: 0;
+  max-width: 760px;
+  color: #6f7e96;
+  font-size: 18px;
+  line-height: 1.9;
+  font-weight: 800;
+}
+
+.driver-register-steps {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.driver-register-steps div {
+  min-height: 58px;
+  padding: 0 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 16px 34px rgba(0, 92, 230, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #0d2d61;
+  font-weight: 900;
+  transition: 0.28s ease;
+}
+
+.driver-register-steps div svg {
+  color: #0b6ff2;
+}
+
+.driver-register-steps div:hover {
+  transform: translateY(-5px);
+  border-color: #a8cdf8;
+  box-shadow: 0 24px 46px rgba(0, 92, 230, 0.16);
+}
+
+.driver-register-side {
+  display: flex;
+  justify-content: center;
+}
+
+.side-card-main {
+  width: 100%;
+  max-width: 410px;
+  min-height: 280px;
+  padding: 32px;
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 247, 255, 0.94)),
+    radial-gradient(circle at top left, rgba(11, 111, 242, 0.16), transparent 42%);
+  border: 1px solid rgba(185, 212, 247, 0.95);
+  box-shadow: 0 28px 64px rgba(0, 92, 230, 0.15);
+  transition: 0.3s ease;
+}
+
+.side-card-main:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 36px 74px rgba(0, 92, 230, 0.22);
+}
+
+.side-card-main svg {
+  width: 70px;
+  height: 70px;
+  padding: 17px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+  color: #fff;
+  box-shadow: 0 18px 36px rgba(0, 92, 230, 0.25);
+}
+
+.side-card-main h3 {
+  margin: 22px 0 10px;
+  color: #071f49;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.side-card-main p {
+  margin: 0;
+  color: #74839b;
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: 800;
+}
+
+.driver-register-wrapper {
+  margin-top: 28px;
+}
+
+.driver-register-card {
+  padding: 30px;
+  border-radius: 36px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(239, 247, 255, 0.95)),
+    radial-gradient(circle at top right, rgba(11, 111, 242, 0.08), transparent 45%);
+  border: 1px solid rgba(185, 212, 247, 0.98);
+  box-shadow: 0 28px 64px rgba(0, 92, 230, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.form-title {
+  margin-bottom: 22px;
+}
+
+.form-title span {
+  display: inline-block;
+  color: #0b6ff2;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 7px;
+}
+
+.form-title h2 {
+  margin: 0;
+  color: #071f49;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.requirements-note {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #eef5ff;
+  border: 1px solid #cfe2fb;
+  color: #0d2d61;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  box-shadow: 0 12px 28px rgba(0, 92, 230, 0.06);
+}
+
+.requirements-note svg {
+  color: #0b6ff2;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.requirements-note p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 800;
+}
+
+.requirements-note strong {
+  color: #df4b4b;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.driver-input-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #0d2d61;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.driver-input-group label small {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 7px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #fff1f1;
+  color: #df4b4b;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.driver-input-group label .optional-label {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+.driver-input-box,
+.driver-textarea-box {
+  border-radius: 18px;
+  border: 1px solid #d9e5f4;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0b6ff2;
+  transition: 0.25s ease;
+}
+
+.driver-input-box {
+  min-height: 58px;
+  padding: 0 16px;
+}
+
+.driver-textarea-box {
+  padding: 15px 16px;
+}
+
+.driver-input-box:hover,
+.driver-input-box:focus-within,
+.driver-textarea-box:hover,
+.driver-textarea-box:focus-within {
+  border-color: #0b6ff2;
+  box-shadow: 0 0 0 4px rgba(11, 111, 242, 0.08);
+  transform: translateY(-2px);
+}
+
+.driver-input-box input,
+.driver-input-box select,
+.driver-textarea-box textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  color: #0d2d61;
+  font-weight: 850;
+}
+
+.driver-textarea-box textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.8;
+}
+
+.driver-input-box input::placeholder,
+.driver-textarea-box textarea::placeholder {
+  color: #a4b0c2;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Vehicle requirements box */
+
+.vehicle-requirements-box {
+  padding: 20px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 18px 38px rgba(0, 92, 230, 0.08);
+  transition: 0.28s ease;
+}
+
+.vehicle-requirements-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 52px rgba(0, 92, 230, 0.14);
+}
+
+.vehicle-requirements-box.license-required {
+  border-color: #f5b5b5;
+  background: linear-gradient(135deg, #ffffff, #fff8f8);
+}
+
+.vehicle-requirements-box.license-optional {
+  border-color: #a8cdf8;
+  background: linear-gradient(135deg, #ffffff, #f4f9ff);
+}
+
+.vehicle-requirements-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.vehicle-requirements-head span {
+  display: block;
+  color: #0b6ff2;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.vehicle-requirements-head h3 {
+  margin: 0;
+  color: #071f49;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.vehicle-requirements-head strong {
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.license-required .vehicle-requirements-head strong {
+  background: #fff1f1;
+  color: #df4b4b;
+}
+
+.license-optional .vehicle-requirements-head strong {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+.vehicle-requirements-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.vehicle-requirements-list div {
+  padding: 14px;
+  border-radius: 18px;
+  background: #f8fbff;
+  border: 1px solid #e3edf8;
+  text-align: center;
+  transition: 0.25s ease;
+}
+
+.vehicle-requirements-list div:hover {
+  transform: translateY(-3px);
+  border-color: #b9d4f7;
+  box-shadow: 0 14px 28px rgba(0, 92, 230, 0.08);
+}
+
+.vehicle-requirements-list svg {
+  color: #17b26a;
+  margin-bottom: 8px;
+}
+
+.vehicle-requirements-list p {
+  margin: 0 0 8px;
+  color: #071f49;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.vehicle-requirements-list b {
+  display: inline-flex;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #fff1f1;
+  color: #df4b4b;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* لو الرخصة اختيارية، آخر عنصر بس يتحول أزرق */
+.license-optional .vehicle-requirements-list div:last-child b {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+/* لو الرخصة إجبارية، آخر عنصر يفضل أحمر */
+.license-required .vehicle-requirements-list div:last-child b {
+  background: #fff1f1;
+  color: #df4b4b;
+}
+
+.documents-section {
+  margin-top: 28px;
+  padding-top: 26px;
+  border-top: 1px solid #e3edf8;
+}
+
+.documents-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.documents-title svg {
+  color: #0b6ff2;
+  flex-shrink: 0;
+}
+
+.documents-title h3 {
+  margin: 0 0 4px;
+  color: #071f49;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.documents-title p {
+  margin: 0;
+  color: #74839b;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.upload-card {
+  min-height: 178px;
+  padding: 22px;
+  border-radius: 26px;
+  border: 1px dashed #a8cdf8;
+  background: #ffffff;
+  color: #0b6ff2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(11, 111, 242, 0.08), transparent);
+  opacity: 0;
+  transition: 0.28s ease;
+}
+
+.upload-card:hover {
+  transform: translateY(-6px);
+  border-color: #0b6ff2;
+  box-shadow: 0 24px 48px rgba(0, 92, 230, 0.14);
+}
+
+.upload-card:hover::before {
+  opacity: 1;
+}
+
+.upload-card svg,
+.upload-card strong,
+.upload-card span,
+.upload-card small {
+  position: relative;
+  z-index: 1;
+}
+
+.upload-card strong {
+  color: #071f49;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.upload-card span {
+  color: #74839b;
+  font-size: 13px;
+  font-weight: 800;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-card small {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* الإجباري أحمر */
+.upload-card.required {
+  border-color: #f5b5b5;
+}
+
+.upload-card.required small {
+  background: #fff1f1;
+  color: #df4b4b;
+}
+
+.upload-card.required:hover {
+  border-color: #df4b4b;
+}
+
+/* الاختياري أزرق */
+.upload-card.optional {
+  border-color: #a8cdf8;
+}
+
+.upload-card.optional small {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+.upload-card.optional:hover {
+  border-color: #0b6ff2;
+}
+
+.upload-card input {
+  display: none;
+}
+
+.upload-card.done {
+  border-style: solid;
+  border-color: #17b26a;
+  background: #f0fff6;
+}
+
+.upload-card.done svg {
+  color: #17b26a;
+}
+
+.upload-card.done small {
+  background: #e9fbef;
+  color: #0f9f4f;
+}
+
+.driver-submit-btn {
+  width: 100%;
+  min-height: 62px;
+  margin-top: 28px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 18px 40px rgba(0, 92, 230, 0.24);
+  transition: 0.28s ease;
+}
+
+.driver-submit-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 56px rgba(0, 92, 230, 0.34);
+}
+
+.driver-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* SUCCESS */
+
+.success-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.success-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 42px;
+  border-radius: 34px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 28px 64px rgba(0, 92, 230, 0.16);
+}
+
+.success-icon {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 20px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 38px rgba(0, 92, 230, 0.24);
+}
+
+.success-card h1 {
+  margin: 0 0 12px;
+  color: #071f49;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.success-card p {
+  margin: 0;
+  color: #74839b;
+  font-size: 16px;
+  line-height: 1.9;
+  font-weight: 800;
+}
+
+.success-link {
+  width: fit-content;
+  min-height: 50px;
+  padding: 0 22px;
+  margin: 24px auto 0;
+  border-radius: 16px;
+  background: #0b6ff2;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.25s ease;
+}
+
+.success-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(0, 92, 230, 0.24);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .driver-register-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .driver-register-content p {
+    margin: 0 auto;
+  }
+
+  .driver-register-steps {
+    justify-content: center;
+  }
+
+  .side-card-main {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .vehicle-requirements-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .form-grid,
+  .upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-title h2 {
+    font-size: 28px;
+  }
+
+  .driver-register-card {
+    padding: 22px;
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .driver-register-hero,
+  .driver-register-wrapper {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .driver-register-content h1 {
+    font-size: 32px;
+  }
+
+  .driver-register-content p {
+    font-size: 15px;
+  }
+
+  .driver-register-steps div {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .side-card-main {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .side-card-main h3 {
+    font-size: 23px;
+  }
+
+  .documents-title {
+    align-items: flex-start;
+  }
+
+  .vehicle-requirements-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vehicle-requirements-list {
+    grid-template-columns: 1fr;
+  }
+
+  .success-card {
+    padding: 28px 20px;
+  }
+
+  .success-card h1 {
+    font-size: 26px;
+  }
+}
+
+/* زر الرجوع للداش بورد في صفحة تسجيل السائق */
+.driver-register-actions {
+  margin: 22px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.driver-register-dashboard-link {
+  min-height: 52px;
+  padding: 0 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-shadow: 0 16px 34px rgba(11, 111, 242, 0.22);
+  transition: 0.25s ease;
+}
+
+.driver-register-dashboard-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 44px rgba(11, 111, 242, 0.3);
+}
+
+@media (max-width: 760px) {
+  .driver-register-actions {
+    width: 100%;
+  }
+
+  .driver-register-dashboard-link {
+    width: 100%;
+  }
+}

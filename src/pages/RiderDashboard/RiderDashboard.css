@@ -1,0 +1,3809 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select,
+a {
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+.rider-page {
+  min-height: 100vh;
+  padding: 22px 0 80px;
+  color: #071f49;
+  font-family: "Cairo", "Tahoma", sans-serif;
+  background:
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(11, 111, 242, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(circle at 6% 84%, rgba(0, 184, 255, 0.18), transparent 35%),
+    linear-gradient(180deg, #f8fbff 0%, #edf6ff 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.rider-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(11, 111, 242, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 111, 242, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rider-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 48%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.rider-bg-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(85px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rider-glow-1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(11, 111, 242, 0.2);
+  top: 100px;
+  right: -110px;
+}
+
+.rider-glow-2 {
+  width: 340px;
+  height: 340px;
+  background: rgba(0, 184, 255, 0.16);
+  bottom: 90px;
+  left: -130px;
+}
+
+.rider-navbar,
+.admin-preview-banner,
+.rider-active-request-banner,
+.rider-hero,
+.trip-builder-section,
+.destination-help-box,
+.rider-map-section,
+.trip-result-grid,
+.drivers-section,
+.rider-profile-modal-overlay {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.rider-navbar {
+  width: min(1280px, calc(100% - 32px));
+  min-height: 86px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(185, 212, 247, 0.95);
+  box-shadow: 0 24px 70px rgba(7, 31, 73, 0.1);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rider-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.rider-logo-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 21px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 16px 34px rgba(0, 92, 230, 0.16);
+  display: grid;
+  place-items: center;
+  transition: 0.28s ease;
+}
+
+.rider-logo:hover .rider-logo-box {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 24px 48px rgba(0, 92, 230, 0.25);
+}
+
+.rider-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.rider-logo h2 {
+  margin: 0;
+  color: #0b6ff2;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.rider-logo p {
+  margin: 4px 0 0;
+  color: #7a879d;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.rider-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 8px;
+  border-radius: 22px;
+  background: rgba(239, 247, 255, 0.95);
+  border: 1px solid rgba(223, 232, 245, 0.95);
+}
+
+.rider-nav-links a,
+.rider-profile-nav-btn {
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 16px;
+  border: none;
+  background: transparent;
+  color: #071f49;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+}
+
+.rider-nav-links a:hover,
+.rider-profile-nav-btn:hover {
+  background: #ffffff;
+  color: #0b6ff2;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(11, 111, 242, 0.12);
+}
+
+.rider-nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-return-btn,
+.locate-nav-btn,
+.rider-mini-profile-btn,
+.rider-logout-btn,
+.map-refresh-btn {
+  min-height: 48px;
+  padding: 0 17px;
+  border-radius: 17px;
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.25s ease;
+}
+
+.admin-return-btn,
+.locate-nav-btn,
+.map-refresh-btn {
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  color: #ffffff;
+  box-shadow: 0 15px 32px rgba(0, 92, 230, 0.24);
+}
+
+.admin-return-btn:hover,
+.locate-nav-btn:hover,
+.map-refresh-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 44px rgba(0, 92, 230, 0.33);
+}
+
+.rider-mini-profile-btn {
+  background: #ffffff;
+  color: #071f49;
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 13px 28px rgba(0, 92, 230, 0.09);
+}
+
+.rider-mini-profile-btn:hover {
+  transform: translateY(-3px);
+  color: #0b6ff2;
+  border-color: #a8cdf8;
+}
+
+.rider-mini-profile-btn span {
+  width: 31px;
+  height: 31px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.rider-logout-btn {
+  background: rgba(255, 241, 241, 0.96);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+}
+
+.rider-logout-btn:hover {
+  transform: translateY(-3px);
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 18px 34px rgba(239, 68, 68, 0.24);
+}
+
+/* =========================
+   BANNERS
+========================= */
+
+.admin-preview-banner,
+.rider-active-request-banner {
+  width: min(1280px, calc(100% - 32px));
+  margin: 16px auto 0;
+  padding: 16px 18px;
+  border-radius: 22px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 18px 42px rgba(0, 92, 230, 0.22);
+}
+
+.admin-preview-banner {
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+}
+
+.rider-active-request-banner {
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+}
+
+.admin-preview-banner h3,
+.rider-active-request-banner h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.admin-preview-banner p,
+.rider-active-request-banner p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+.rider-active-request-banner div {
+  flex: 1;
+}
+
+.rider-active-request-banner button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0b6ff2;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.rider-hero {
+  width: min(1280px, calc(100% - 32px));
+  margin: 34px auto 0;
+  padding: 64px 32px;
+  border-radius: 42px;
+  background:
+    radial-gradient(
+      circle at 90% 5%,
+      rgba(11, 111, 242, 0.14),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.76),
+      rgba(235, 246, 255, 0.62)
+    );
+  border: 1px solid rgba(185, 212, 247, 0.8);
+  box-shadow: 0 30px 82px rgba(7, 31, 73, 0.1);
+  backdrop-filter: blur(16px);
+  text-align: center;
+}
+
+.rider-hero-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.rider-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #dfe8f5;
+  color: #0b6ff2;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 14px 28px rgba(0, 92, 230, 0.09);
+}
+
+.rider-hero h1 {
+  margin: 18px 0 14px;
+  color: #071f49;
+  font-size: clamp(46px, 6vw, 92px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  font-weight: 900;
+}
+
+.rider-hero p {
+  margin: 0 auto;
+  max-width: 800px;
+  color: #66758e;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 2;
+}
+
+.rider-hero-actions-v2 {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-primary-btn,
+.hero-secondary-btn {
+  min-height: 58px;
+  padding: 0 24px;
+  border-radius: 18px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 900;
+  transition: 0.25s ease;
+}
+
+.hero-primary-btn {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  box-shadow: 0 18px 38px rgba(11, 111, 242, 0.24);
+}
+
+.hero-secondary-btn {
+  color: #071f49;
+  background: #ffffff;
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 14px 30px rgba(7, 31, 73, 0.07);
+}
+
+.hero-primary-btn:hover,
+.hero-secondary-btn:hover {
+  transform: translateY(-4px);
+}
+
+.hero-secondary-btn:hover {
+  color: #0b6ff2;
+  border-color: #a8cdf8;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.rider-section-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.rider-section-title span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b6ff2;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.rider-section-title h2 {
+  margin: 0;
+  color: #071f49;
+  font-size: clamp(32px, 4.3vw, 54px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+/* =========================
+   TRIP BUILDER
+========================= */
+
+.trip-builder-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 44px auto 0;
+}
+
+.trip-builder-card {
+  padding: 30px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(185, 212, 247, 0.96);
+  box-shadow: 0 28px 78px rgba(7, 31, 73, 0.11);
+  backdrop-filter: blur(18px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 26px;
+  align-items: stretch;
+}
+
+.trip-column {
+  padding: 24px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ffffff, #f7fbff);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 18px 42px rgba(0, 92, 230, 0.07);
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.trip-column-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #071f49;
+}
+
+.trip-column-title h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.trip-column-title svg {
+  color: #0b6ff2;
+}
+
+.trip-divider {
+  align-self: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  color: #0b6ff2;
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 16px 30px rgba(0, 92, 230, 0.12);
+}
+
+.current-location-toggle,
+.map-pick-btn,
+.online-toggle,
+.calculate-trip-btn {
+  min-height: 58px;
+  border: none;
+  border-radius: 19px;
+  font-size: 15px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: 0.25s ease;
+}
+
+.current-location-toggle,
+.calculate-trip-btn,
+.online-toggle.active {
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  color: #ffffff;
+  box-shadow: 0 17px 36px rgba(0, 92, 230, 0.24);
+}
+
+.map-pick-btn,
+.online-toggle {
+  background: #ffffff;
+  color: #0b6ff2;
+  border: 1px solid #dfe8f5;
+}
+
+.map-pick-btn.destination,
+.map-pick-btn.active {
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+  color: #ffffff;
+  border: none;
+}
+
+.current-location-toggle:hover,
+.map-pick-btn:hover,
+.online-toggle:hover,
+.calculate-trip-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 92, 230, 0.18);
+}
+
+.filter-box,
+.destination-search-box {
+  display: grid;
+  gap: 9px;
+}
+
+.filter-box label,
+.destination-search-box label {
+  color: #071f49;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.filter-input {
+  min-height: 58px;
+  padding: 0 15px;
+  border-radius: 19px;
+  background: #ffffff;
+  border: 1px solid #d9e5f4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.25s ease;
+}
+
+.filter-input:hover,
+.filter-input:focus-within {
+  border-color: #0b6ff2;
+  box-shadow: 0 0 0 4px rgba(11, 111, 242, 0.08);
+}
+
+.filter-input svg {
+  color: #0b6ff2;
+  flex-shrink: 0;
+}
+
+.filter-input select {
+  width: 100%;
+  height: 56px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #071f49;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.destination-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 116px;
+  gap: 10px;
+}
+
+.destination-search-row input {
+  width: 100%;
+  min-height: 58px;
+  border-radius: 19px;
+  border: 1px solid #d9e5f4;
+  outline: none;
+  background: #ffffff;
+  color: #071f49;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 850;
+  transition: 0.25s ease;
+}
+
+.destination-search-row input:focus,
+.destination-search-row input:hover {
+  border-color: #0b6ff2;
+  box-shadow: 0 0 0 4px rgba(11, 111, 242, 0.08);
+}
+
+.destination-search-row button {
+  min-height: 58px;
+  border: none;
+  border-radius: 19px;
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  color: #ffffff;
+  font-weight: 900;
+  box-shadow: 0 15px 32px rgba(0, 92, 230, 0.22);
+}
+
+.destination-selected-box {
+  padding: 18px;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ffffff, #f7fbff);
+  border: 1px solid #dfe8f5;
+  display: grid;
+  gap: 8px;
+}
+
+.destination-selected-box span {
+  color: #7a879d;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.destination-selected-box strong {
+  color: #071f49;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.7;
+}
+
+.destination-selected-box button {
+  min-height: 44px;
+  border-radius: 15px;
+  border: none;
+  background: #eef5ff;
+  color: #0b6ff2;
+  font-weight: 900;
+}
+
+.trip-options {
+  grid-column: 1 / -1;
+  padding-top: 22px;
+  border-top: 1px solid #dfe8f5;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.15fr;
+  gap: 15px;
+  align-items: end;
+}
+
+.destination-help-box {
+  width: min(1180px, calc(100% - 32px));
+  margin: 18px auto 0;
+  padding: 18px 20px;
+  border-radius: 24px;
+  background: rgba(238, 245, 255, 0.95);
+  border: 1px solid #dfe8f5;
+  color: #607087;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 900;
+  line-height: 1.7;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(0, 92, 230, 0.06);
+}
+
+.destination-help-box svg {
+  color: #0b6ff2;
+  flex-shrink: 0;
+}
+
+.destination-help-box p {
+  margin: 0;
+}
+
+/* =========================
+   MAP
+========================= */
+
+.rider-map-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 44px auto 0;
+}
+
+.map-title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: right;
+  margin-bottom: 22px;
+}
+
+.map-title-row .rider-section-title,
+.map-title-row div {
+  min-width: 0;
+}
+
+.map-top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.map-refresh-btn {
+  min-width: 170px;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 18px;
+  border: none;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.map-refresh-btn.dark {
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+}
+
+.map-selection-alert {
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border-radius: 22px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 900;
+  box-shadow: 0 18px 38px rgba(0, 92, 230, 0.2);
+}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: 1.65fr 0.78fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.map-panel,
+.map-side-card {
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 26px 68px rgba(0, 92, 230, 0.11);
+  overflow: hidden;
+}
+
+.rider-map {
+  width: 100%;
+  height: 560px;
+  min-height: 500px;
+  z-index: 1;
+}
+
+.map-side-card {
+  padding: 26px;
+  overflow: visible;
+}
+
+.map-side-card h3 {
+  margin: 0 0 18px;
+  color: #071f49;
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.map-side-list {
+  display: grid;
+  gap: 13px;
+}
+
+.map-side-list div {
+  padding: 17px;
+  border-radius: 21px;
+  background: linear-gradient(135deg, #f8fbff, #eef6ff);
+  border: 1px solid #e2ecf7;
+}
+
+.map-side-list span {
+  display: block;
+  color: #8a97aa;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.map-side-list strong {
+  color: #071f49;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.7;
+}
+
+/* =========================
+   LEAFLET
+========================= */
+
+.future-marker {
+  width: 52px;
+  height: 52px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.marker-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(11, 111, 242, 0.18);
+  animation: markerPulse 1.4s infinite;
+}
+
+.marker-core {
+  width: 39px;
+  height: 39px;
+  border-radius: 15px;
+  background: #ffffff;
+  border: 2px solid #0b6ff2;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  box-shadow: 0 14px 30px rgba(0, 92, 230, 0.24);
+  z-index: 1;
+}
+
+.future-marker.destination .marker-core {
+  border-color: #071f49;
+}
+
+.future-marker.driver .marker-core {
+  border-color: #00b8ff;
+}
+
+.future-marker.busy {
+  opacity: 0.7;
+  filter: grayscale(0.4);
+}
+
+@keyframes markerPulse {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1.28);
+    opacity: 0;
+  }
+}
+
+.popup-card {
+  min-width: 160px;
+  text-align: right;
+}
+
+.popup-card strong {
+  display: block;
+  color: #071f49;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.popup-card p,
+.popup-card span,
+.popup-card small {
+  display: block;
+  margin: 4px 0 0;
+  color: #607087;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 14px 34px rgba(7, 31, 73, 0.14) !important;
+}
+
+.leaflet-control-zoom a {
+  width: 38px !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  border: none !important;
+  color: #071f49 !important;
+  font-weight: 900 !important;
+}
+
+/* =========================
+   TRIP RESULT
+========================= */
+
+.trip-result-grid {
+  width: min(1180px, calc(100% - 32px));
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.trip-result-card {
+  min-height: 160px;
+  padding: 24px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 22px 52px rgba(0, 92, 230, 0.09);
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  transition: 0.25s ease;
+}
+
+.trip-result-card:hover {
+  transform: translateY(-5px);
+  border-color: #a8cdf8;
+  box-shadow: 0 30px 64px rgba(0, 92, 230, 0.15);
+}
+
+.trip-result-card svg {
+  color: #0b6ff2;
+}
+
+.trip-result-card span {
+  color: #7a879d;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.trip-result-card strong {
+  color: #071f49;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.trip-result-card small {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.price-card {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  border: none;
+}
+
+.price-card svg,
+.price-card span,
+.price-card strong {
+  color: #ffffff;
+}
+
+/* =========================
+   DRIVERS
+========================= */
+
+.drivers-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 48px auto 0;
+}
+
+.drivers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.driver-card {
+  position: relative;
+  padding: 22px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 22px 52px rgba(0, 92, 230, 0.1);
+  transition: 0.25s ease;
+  overflow: hidden;
+}
+
+.driver-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 111, 242, 0.08),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+.driver-card:hover,
+.driver-card.active {
+  transform: translateY(-7px);
+  border-color: #a8cdf8;
+  box-shadow: 0 32px 74px rgba(0, 92, 230, 0.17);
+}
+
+.driver-card:hover::before,
+.driver-card.active::before {
+  opacity: 1;
+}
+
+.driver-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.driver-rank {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  min-width: 42px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #eef5ff;
+  color: #0b6ff2;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+  z-index: 2;
+}
+
+.driver-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 50px;
+}
+
+.driver-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 21px;
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 16px 32px rgba(0, 92, 230, 0.24);
+}
+
+.driver-info {
+  flex: 1;
+}
+
+.driver-info h3 {
+  margin: 0 0 5px;
+  color: #071f49;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.driver-info p {
+  margin: 0;
+  color: #718097;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.driver-status {
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.driver-status.online {
+  background: #e9fbef;
+  color: #0f9f4f;
+}
+
+.driver-status.busy {
+  background: #fff3e6;
+  color: #d97706;
+}
+
+.driver-tags,
+.driver-meta,
+.driver-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.vehicle-tag,
+.rating-tag,
+.driver-meta div {
+  min-height: 38px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #f7fbff;
+  border: 1px solid #e2ecf7;
+  color: #071f49;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.rating-tag,
+.vehicle-tag svg,
+.driver-meta svg {
+  color: #0b6ff2;
+}
+
+.driver-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.call-btn,
+.msg-btn,
+.map-btn,
+.directions-btn {
+  min-height: 46px;
+  border-radius: 15px;
+  border: none;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: 0.25s ease;
+}
+
+.call-btn {
+  background: #e9fbef;
+  color: #0f9f4f;
+}
+
+.msg-btn {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+.map-btn {
+  background: #071f49;
+  color: #ffffff;
+}
+
+.directions-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #0b6ff2, #005ce6);
+  color: #ffffff;
+}
+
+.call-btn:hover,
+.msg-btn:hover,
+.map-btn:hover,
+.directions-btn:hover {
+  transform: translateY(-3px);
+}
+
+.directions-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.empty-drivers {
+  grid-column: 1 / -1;
+  padding: 54px 24px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px dashed #b9d4f7;
+  text-align: center;
+  box-shadow: 0 22px 52px rgba(0, 92, 230, 0.08);
+}
+
+.empty-drivers h3 {
+  margin: 0 0 10px;
+  color: #071f49;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.empty-drivers p {
+  margin: 0 auto;
+  max-width: 780px;
+  color: #718097;
+  font-weight: 900;
+  line-height: 1.9;
+}
+
+/* Request status card */
+.driver-card .destination-help-box {
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(238, 245, 255, 0.95);
+  border: 1px solid #dfe8f5;
+  color: #607087;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 1.8;
+  box-shadow: none;
+}
+
+.driver-card .destination-help-box svg {
+  margin-top: 3px;
+  color: #0b6ff2;
+  flex-shrink: 0;
+}
+
+.driver-card .destination-help-box p {
+  margin: 0;
+  font-weight: 900;
+}
+
+.drivers-section .driver-card.active .map-btn {
+  background: #fff1f1;
+  color: #ef4444;
+}
+
+.drivers-section .driver-card.active .msg-btn {
+  background: #eef5ff;
+  color: #0b6ff2;
+}
+
+/* =========================
+   PROFILE MODAL
+========================= */
+
+.rider-profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 24px;
+  background: rgba(7, 31, 73, 0.42);
+  backdrop-filter: blur(12px);
+  display: grid;
+  place-items: center;
+}
+
+.rider-profile-modal {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 35px 95px rgba(7, 31, 73, 0.28);
+  position: relative;
+}
+
+.rider-profile-modal-close {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 15px;
+  background: #fff1f1;
+  color: #ef4444;
+  display: grid;
+  place-items: center;
+}
+
+.rider-profile-modal-hero {
+  padding: 24px;
+  border-radius: 28px;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 255, 255, 0.2),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #071f49, #0b6ff2);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.rider-profile-modal-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.rider-profile-modal-hero span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 900;
+  opacity: 0.92;
+}
+
+.rider-profile-modal-hero h2 {
+  margin: 8px 0 4px;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.rider-profile-modal-hero p {
+  margin: 0;
+  opacity: 0.84;
+  font-weight: 800;
+}
+
+.rider-profile-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.rider-profile-modal-tags strong {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.rider-profile-modal-stats {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.rider-profile-modal-stats div {
+  padding: 18px;
+  border-radius: 22px;
+  background: #f7fbff;
+  border: 1px solid #e2ecf7;
+}
+
+.rider-profile-modal-stats svg {
+  color: #0b6ff2;
+}
+
+.rider-profile-modal-stats span {
+  display: block;
+  margin: 8px 0 4px;
+  color: #7a879d;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.rider-profile-modal-stats strong {
+  color: #071f49;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.rider-profile-modal-footer {
+  margin-top: 16px;
+}
+
+.rider-profile-modal-footer a {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  text-decoration: none;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-shadow: 0 16px 34px rgba(0, 92, 230, 0.22);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1150px) {
+  .rider-navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rider-logo {
+    justify-content: center;
+  }
+
+  .rider-nav-links,
+  .rider-nav-actions {
+    justify-content: center;
+  }
+
+  .trip-builder-card,
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-divider {
+    margin: 0 auto;
+  }
+
+  .trip-options {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-result-grid,
+  .drivers-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rider-map {
+    height: 500px;
+    min-height: 450px;
+  }
+
+  .map-title-row {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .map-top-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .rider-page {
+    padding: 10px 0 45px;
+  }
+
+  .rider-navbar,
+  .rider-hero,
+  .trip-builder-section,
+  .destination-help-box,
+  .rider-map-section,
+  .trip-result-grid,
+  .drivers-section,
+  .admin-preview-banner,
+  .rider-active-request-banner {
+    width: min(100% - 24px, 1280px);
+  }
+
+  .rider-navbar {
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .rider-logo {
+    flex-direction: row-reverse;
+  }
+
+  .rider-logo h2 {
+    font-size: 24px;
+  }
+
+  .rider-logo p {
+    font-size: 11px;
+  }
+
+  .rider-logo-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+  }
+
+  .rider-nav-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rider-nav-links a,
+  .rider-profile-nav-btn {
+    width: 100%;
+  }
+
+  .rider-nav-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .rider-mini-profile-btn,
+  .locate-nav-btn,
+  .rider-logout-btn,
+  .admin-return-btn {
+    width: 100%;
+  }
+
+  .rider-hero {
+    margin-top: 22px;
+    padding: 38px 18px;
+    border-radius: 30px;
+  }
+
+  .rider-hero h1 {
+    font-size: 44px;
+    letter-spacing: -0.8px;
+  }
+
+  .rider-hero p {
+    font-size: 15px;
+  }
+
+  .rider-hero-actions-v2 {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    width: 100%;
+  }
+
+  .rider-section-title h2 {
+    font-size: 34px;
+  }
+
+  .trip-builder-card {
+    padding: 18px;
+    border-radius: 30px;
+    gap: 18px;
+  }
+
+  .trip-column {
+    padding: 18px;
+    border-radius: 26px;
+  }
+
+  .trip-column-title h3 {
+    font-size: 22px;
+  }
+
+  .destination-search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .destination-search-row button {
+    width: 100%;
+  }
+
+  .destination-help-box {
+    align-items: flex-start;
+    text-align: right;
+  }
+
+  .map-title-row {
+    display: grid;
+    text-align: center;
+  }
+
+  .map-top-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .map-top-actions .map-refresh-btn {
+    width: 100%;
+  }
+
+  .rider-map {
+    height: 430px;
+    min-height: 430px;
+  }
+
+  .map-side-card {
+    padding: 18px;
+    border-radius: 26px;
+  }
+
+  .trip-result-grid,
+  .drivers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-result-card {
+    min-height: 135px;
+    border-radius: 26px;
+  }
+
+  .driver-card {
+    padding: 18px;
+    border-radius: 26px;
+  }
+
+  .driver-top {
+    align-items: flex-start;
+    padding-left: 42px;
+  }
+
+  .driver-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .call-btn,
+  .msg-btn,
+  .map-btn {
+    width: 100%;
+  }
+
+  .rider-profile-modal-overlay {
+    padding: 12px;
+  }
+
+  .rider-profile-modal {
+    border-radius: 28px;
+    padding: 16px;
+  }
+
+  .rider-profile-modal-hero {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 24px;
+  }
+
+  .rider-profile-modal-tags {
+    justify-content: center;
+  }
+
+  .rider-profile-modal-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .rider-hero h1 {
+    font-size: 38px;
+  }
+
+  .rider-section-title h2 {
+    font-size: 30px;
+  }
+
+  .rider-map {
+    height: 390px;
+    min-height: 390px;
+  }
+
+  .current-location-toggle,
+  .map-pick-btn,
+  .online-toggle,
+  .calculate-trip-btn,
+  .map-refresh-btn {
+    font-size: 14px;
+  }
+}
+
+/* =====================================================
+   FINAL UI POLISH FIX
+   حطه آخر RiderDashboard.css
+===================================================== */
+
+/* صغّر الهيرو وخليه شيك */
+.rider-hero {
+  min-height: auto !important;
+  margin-top: 26px !important;
+  padding: 46px 24px 38px !important;
+  border-radius: 36px !important;
+  text-align: center !important;
+}
+
+.rider-hero h1 {
+  font-size: clamp(42px, 5vw, 72px) !important;
+  line-height: 1.08 !important;
+  margin: 16px 0 12px !important;
+}
+
+.rider-hero p {
+  max-width: 760px !important;
+  font-size: 17px !important;
+  line-height: 1.9 !important;
+}
+
+.rider-hero-actions-v2 {
+  margin-top: 22px !important;
+}
+
+/* ظبط المسافات بين السكاشن */
+.trip-builder-section,
+.rider-map-section,
+.drivers-section {
+  margin-top: 34px !important;
+}
+
+/* العنوان بتاع كل سيكشن */
+.rider-section-title {
+  margin-bottom: 18px !important;
+}
+
+.rider-section-title h2 {
+  font-size: clamp(30px, 3.4vw, 44px) !important;
+  line-height: 1.2 !important;
+}
+
+/* كارت تحديد المشوار يبقى متماسك */
+.trip-builder-card {
+  padding: 24px !important;
+  border-radius: 32px !important;
+  gap: 22px !important;
+}
+
+.trip-column {
+  padding: 22px !important;
+  border-radius: 26px !important;
+}
+
+.trip-column-title h3 {
+  font-size: 24px !important;
+}
+
+/* أزرار الفورم */
+.current-location-toggle,
+.map-pick-btn,
+.online-toggle,
+.calculate-trip-btn {
+  min-height: 54px !important;
+  border-radius: 17px !important;
+}
+
+/* الرسالة اللي تحت الفورم */
+.destination-help-box {
+  width: min(1180px, calc(100% - 32px)) !important;
+  margin: 14px auto 0 !important;
+  padding: 15px 18px !important;
+  border-radius: 20px !important;
+}
+
+/* قسم الخريطة */
+.rider-map-section {
+  margin-top: 38px !important;
+}
+
+.map-title-row {
+  margin-bottom: 18px !important;
+  align-items: center !important;
+}
+
+.map-layout {
+  grid-template-columns: 1.55fr 0.85fr !important;
+  gap: 18px !important;
+}
+
+.map-panel,
+.map-side-card {
+  border-radius: 30px !important;
+}
+
+.rider-map {
+  height: 500px !important;
+  min-height: 500px !important;
+}
+
+/* ظبط أزرار Leaflet اللي طالعة شكلها وحش */
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 50 !important;
+}
+
+.leaflet-control-zoom {
+  margin: 16px !important;
+  border: none !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 30px rgba(7, 31, 73, 0.16) !important;
+}
+
+.leaflet-control-zoom a {
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  border: none !important;
+  background: #ffffff !important;
+  color: #071f49 !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #eef5ff !important;
+  color: #0b6ff2 !important;
+}
+
+/* اخفاء شكل أزرار الخريطة الصغيرة القديمة لو طالعة فوق الخريطة */
+.rider-map-section > button,
+.rider-map-section > .map-refresh-btn {
+  display: none !important;
+}
+
+/* ملخص المشوار */
+.map-side-card {
+  padding: 22px !important;
+}
+
+.map-side-card h3 {
+  font-size: 25px !important;
+  margin-bottom: 14px !important;
+}
+
+.map-side-list div {
+  padding: 15px !important;
+  border-radius: 18px !important;
+}
+
+/* سكشن السائقين */
+.drivers-section {
+  margin-top: 42px !important;
+}
+
+.empty-drivers {
+  padding: 46px 22px !important;
+  border-radius: 30px !important;
+}
+
+.empty-drivers h3 {
+  font-size: 26px !important;
+}
+
+.empty-drivers p {
+  font-size: 16px !important;
+  line-height: 1.9 !important;
+}
+
+/* الكروت بعد حساب المشوار */
+.trip-result-grid {
+  margin-top: 24px !important;
+}
+
+.trip-result-card {
+  min-height: 140px !important;
+  border-radius: 26px !important;
+}
+
+/* Responsive */
+@media (max-width: 1150px) {
+  .map-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rider-map {
+    height: 460px !important;
+    min-height: 460px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .rider-hero {
+    padding: 34px 18px 28px !important;
+    border-radius: 28px !important;
+  }
+
+  .rider-hero h1 {
+    font-size: 40px !important;
+  }
+
+  .rider-hero p {
+    font-size: 15px !important;
+  }
+
+  .trip-builder-card {
+    padding: 16px !important;
+    border-radius: 26px !important;
+  }
+
+  .trip-column {
+    padding: 16px !important;
+    border-radius: 22px !important;
+  }
+
+  .rider-section-title h2 {
+    font-size: 30px !important;
+  }
+
+  .rider-map {
+    height: 390px !important;
+    min-height: 390px !important;
+  }
+
+  .map-side-card {
+    padding: 16px !important;
+  }
+
+  .empty-drivers {
+    padding: 34px 18px !important;
+  }
+
+  .empty-drivers h3 {
+    font-size: 23px !important;
+  }
+}
+
+/* =====================================================
+   SIMPLE MOBILE UX UPDATE
+   مناسب للموبايل وللمستخدم البسيط
+   Add at the end / مضاف في آخر الملف
+===================================================== */
+
+.mobile-quick-action {
+  display: none;
+}
+
+/* خليك على تجربة موبايل أبسط */
+@media (max-width: 760px) {
+  .rider-page {
+    padding: 8px 0 96px !important;
+    background:
+      radial-gradient(
+        circle at 80% 0%,
+        rgba(11, 111, 242, 0.18),
+        transparent 28%
+      ),
+      linear-gradient(180deg, #f8fbff 0%, #eef7ff 100%) !important;
+  }
+
+  .rider-page::before {
+    background-size: 34px 34px !important;
+  }
+
+  /* الهيدر يكون خفيف */
+  .rider-navbar {
+    width: calc(100% - 18px) !important;
+    min-height: auto !important;
+    margin: 8px auto 0 !important;
+    padding: 12px !important;
+    border-radius: 22px !important;
+    gap: 10px !important;
+  }
+
+  .rider-logo {
+    justify-content: center !important;
+  }
+
+  .rider-logo-box {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 16px !important;
+  }
+
+  .rider-logo h2 {
+    font-size: 24px !important;
+  }
+
+  .rider-logo p {
+    font-size: 11px !important;
+  }
+
+  .rider-nav-links {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 6px !important;
+    padding: 6px !important;
+    border-radius: 18px !important;
+  }
+
+  .rider-nav-links a,
+  .rider-profile-nav-btn {
+    min-height: 40px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .rider-nav-actions {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 7px !important;
+  }
+
+  .rider-mini-profile-btn,
+  .locate-nav-btn,
+  .rider-logout-btn,
+  .admin-return-btn {
+    min-height: 42px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .rider-mini-profile-btn span {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 9px !important;
+  }
+
+  /* الهيرو أصغر جدًا للموبايل */
+  .rider-hero {
+    width: calc(100% - 18px) !important;
+    margin-top: 14px !important;
+    padding: 28px 14px 24px !important;
+    border-radius: 26px !important;
+  }
+
+  .rider-badge {
+    min-height: 34px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+  }
+
+  .rider-hero h1 {
+    font-size: 34px !important;
+    line-height: 1.12 !important;
+    margin: 14px 0 10px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .rider-hero p {
+    max-width: 100% !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  .rider-hero-actions-v2 {
+    margin-top: 16px !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    min-height: 50px !important;
+    border-radius: 16px !important;
+    font-size: 15px !important;
+  }
+
+  /* عناوين السكاشن أوضح وأصغر */
+  .trip-builder-section,
+  .rider-map-section,
+  .drivers-section,
+  .trip-result-grid,
+  .destination-help-box,
+  .admin-preview-banner,
+  .rider-active-request-banner {
+    width: calc(100% - 18px) !important;
+  }
+
+  .trip-builder-section {
+    margin-top: 22px !important;
+  }
+
+  .rider-section-title {
+    margin-bottom: 12px !important;
+  }
+
+  .rider-section-title span {
+    font-size: 13px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .rider-section-title h2 {
+    font-size: 28px !important;
+    line-height: 1.18 !important;
+  }
+
+  /* فورم الطلب السريع */
+  .trip-builder-card {
+    padding: 12px !important;
+    border-radius: 24px !important;
+    gap: 12px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .trip-column {
+    padding: 14px !important;
+    border-radius: 20px !important;
+    gap: 12px !important;
+    box-shadow: 0 12px 28px rgba(0, 92, 230, 0.06) !important;
+  }
+
+  .trip-column-title {
+    justify-content: flex-start !important;
+  }
+
+  .trip-column-title h3 {
+    font-size: 20px !important;
+  }
+
+  .trip-divider {
+    width: 46px !important;
+    height: 46px !important;
+    margin: -2px auto !important;
+  }
+
+  .current-location-toggle,
+  .map-pick-btn,
+  .online-toggle,
+  .calculate-trip-btn,
+  .destination-search-row button {
+    min-height: 52px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+
+  .filter-box label,
+  .destination-search-box label {
+    font-size: 13px !important;
+  }
+
+  .filter-input,
+  .destination-search-row input {
+    min-height: 52px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+
+  .filter-input select {
+    height: 50px !important;
+    font-size: 14px !important;
+  }
+
+  .destination-search-row {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .destination-selected-box {
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .destination-selected-box strong {
+    font-size: 14px !important;
+  }
+
+  .trip-options {
+    padding-top: 14px !important;
+    gap: 10px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .destination-help-box {
+    margin-top: 10px !important;
+    padding: 13px 14px !important;
+    border-radius: 18px !important;
+    font-size: 13px !important;
+    align-items: flex-start !important;
+    text-align: right !important;
+  }
+
+  /* الخريطة تبقى اختيارية ومريحة */
+  .rider-map-section {
+    margin-top: 24px !important;
+  }
+
+  .map-title-row {
+    margin-bottom: 12px !important;
+    gap: 12px !important;
+  }
+
+  .map-top-actions {
+    gap: 8px !important;
+  }
+
+  .map-refresh-btn {
+    min-height: 50px !important;
+    min-width: 100% !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+
+  .map-selection-alert {
+    padding: 13px 14px !important;
+    border-radius: 18px !important;
+    font-size: 13px !important;
+  }
+
+  .map-layout {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .map-panel,
+  .map-side-card {
+    border-radius: 22px !important;
+  }
+
+  .rider-map {
+    height: 360px !important;
+    min-height: 360px !important;
+  }
+
+  .map-side-card {
+    padding: 14px !important;
+  }
+
+  .map-side-card h3 {
+    font-size: 22px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .map-side-list {
+    gap: 9px !important;
+  }
+
+  .map-side-list div {
+    padding: 13px !important;
+    border-radius: 16px !important;
+  }
+
+  .map-side-list strong {
+    font-size: 14px !important;
+  }
+
+  /* نتائج السعر */
+  .trip-result-grid {
+    margin-top: 16px !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .trip-result-card {
+    min-height: 116px !important;
+    padding: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .trip-result-card strong {
+    font-size: 24px !important;
+  }
+
+  /* السواقين */
+  .drivers-section {
+    margin-top: 24px !important;
+  }
+
+  .drivers-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .driver-card {
+    padding: 15px !important;
+    border-radius: 22px !important;
+  }
+
+  .driver-top {
+    padding-left: 0 !important;
+    gap: 10px !important;
+  }
+
+  .driver-avatar {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 17px !important;
+  }
+
+  .driver-info h3 {
+    font-size: 16px !important;
+  }
+
+  .driver-info p {
+    font-size: 12px !important;
+  }
+
+  .driver-status {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+  }
+
+  .driver-rank {
+    position: static !important;
+    width: fit-content !important;
+    margin-bottom: 8px !important;
+  }
+
+  .driver-tags,
+  .driver-meta,
+  .driver-actions {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  .vehicle-tag,
+  .rating-tag,
+  .driver-meta div {
+    min-height: 34px !important;
+    font-size: 12px !important;
+  }
+
+  .driver-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .call-btn,
+  .msg-btn,
+  .map-btn,
+  .directions-btn {
+    min-height: 48px !important;
+    width: 100% !important;
+    border-radius: 15px !important;
+    font-size: 14px !important;
+  }
+
+  .empty-drivers {
+    padding: 28px 16px !important;
+    border-radius: 22px !important;
+  }
+
+  .empty-drivers h3 {
+    font-size: 22px !important;
+  }
+
+  .empty-drivers p {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  /* زر ثابت تحت الشاشة للموبايل */
+  .mobile-quick-action {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    z-index: 9999;
+    display: block;
+  }
+
+  .mobile-quick-action button {
+    width: 100%;
+    min-height: 58px;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0b6ff2, #071f49);
+    font-size: 16px;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 18px 45px rgba(7, 31, 73, 0.35);
+  }
+}
+
+/* Desktop يخلي زر الموبايل مختفي */
+@media (min-width: 761px) {
+  .mobile-quick-action {
+    display: none !important;
+  }
+}
+
+/* عرض التفاوض للراكب */
+.rider-offer-box {
+  margin: 14px 0;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid;
+  display: grid;
+  gap: 12px;
+}
+
+.rider-offer-box.active {
+  color: #0a62ff;
+  background: #eef5ff;
+  border-color: rgba(10, 98, 255, 0.24);
+  box-shadow: 0 18px 40px rgba(10, 98, 255, 0.1);
+}
+
+.rider-offer-box.expired {
+  color: #b45309;
+  background: #fff8e7;
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.rider-offer-box > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+}
+
+.rider-offer-box h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #08295b;
+}
+
+.rider-offer-box p {
+  margin: 0;
+  color: #657796;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.8;
+}
+
+.rider-offer-prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 11px;
+}
+
+.rider-offer-prices div {
+  padding: 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #dce8fb;
+}
+
+.rider-offer-prices span {
+  display: block;
+  margin-bottom: 5px;
+  color: #657796;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.rider-offer-prices strong {
+  color: #08295b;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.driver-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+}
+
+@media (max-width: 768px) {
+  .rider-offer-prices {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* زر الراكب لزيادة سعر المشوار */
+.urgent-price-btn {
+  min-height: 46px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 15px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(245, 158, 11, 0.22);
+}
+
+.rider-offer-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+  padding: 18px;
+  background: rgba(4, 18, 44, 0.58);
+  backdrop-filter: blur(18px);
+  display: grid;
+  place-items: center;
+}
+
+.rider-offer-modal-card {
+  position: relative;
+  width: min(520px, 100%);
+  padding: 28px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, #ffffff, #f6fbff);
+  border: 1px solid #dce8fb;
+  box-shadow: 0 34px 90px rgba(4, 18, 44, 0.26);
+  text-align: center;
+}
+
+.rider-offer-modal-close {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 14px;
+  background: #fff1f1;
+  color: #df4b4b;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.rider-offer-modal-icon {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 14px;
+  border-radius: 28px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 20px 44px rgba(245, 158, 11, 0.24);
+}
+
+.rider-offer-modal-card > span {
+  color: #0b6ff2;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.rider-offer-modal-card h3 {
+  margin: 8px 0 10px;
+  color: #071f49;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.rider-offer-modal-card p {
+  margin: 0 0 18px;
+  color: #657796;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.8;
+}
+
+.rider-offer-modal-input {
+  display: grid;
+  gap: 8px;
+  text-align: right;
+  margin-bottom: 14px;
+}
+
+.rider-offer-modal-input span {
+  color: #071f49;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.rider-offer-modal-input input {
+  min-height: 54px;
+  padding: 0 14px;
+  border-radius: 17px;
+  border: 1px solid #dce8fb;
+  outline: none;
+  font-size: 17px;
+  font-weight: 900;
+  color: #071f49;
+  background: #ffffff;
+}
+
+.rider-offer-modal-actions {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 10px;
+}
+
+.rider-offer-modal-actions button {
+  min-height: 52px;
+  border: none;
+  border-radius: 17px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rider-offer-modal-actions button:first-child {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.rider-offer-modal-actions button:last-child {
+  color: #071f49;
+  background: #eef5ff;
+}
+
+@media (max-width: 760px) {
+  .rider-offer-modal-card {
+    padding: 22px 16px;
+    border-radius: 26px;
+  }
+
+  .rider-offer-modal-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* زر زيادة السعر قبل إرسال الطلب */
+.quick-rider-price-increase {
+  width: min(1480px, calc(100% - 32px));
+  margin: 22px auto 0;
+  padding: 18px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #fff8e7, #ffffff);
+  border: 1px solid rgba(245, 158, 11, 0.24);
+  box-shadow: 0 18px 42px rgba(245, 158, 11, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.quick-rider-price-increase > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quick-rider-price-increase svg {
+  color: #f59e0b;
+}
+
+.quick-rider-price-increase span {
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.quick-rider-price-increase h3 {
+  margin: 4px 0;
+  color: #071f49;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.quick-rider-price-increase p {
+  margin: 0;
+  color: #657796;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.7;
+}
+
+.quick-rider-price-increase button {
+  min-height: 52px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 17px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .quick-rider-price-increase {
+    width: calc(100% - 20px);
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quick-rider-price-increase button {
+    width: 100%;
+  }
+}
+
+/* عدد السائقين المتاحين داخل كارت طلب المشوار */
+.request-now-summary {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 900px) {
+  .request-now-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* عدد السائقين المتاحين داخل كارت طلب المشوار */
+.request-now-summary {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 900px) {
+  .request-now-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* إلغاء اختيار السائق من الراكب - الطلب يروح لأول سائق يقبل */
+.request-now-section .single-status-grid {
+  grid-template-columns: minmax(280px, 720px);
+  justify-content: center;
+}
+
+.request-now-card {
+  width: min(780px, calc(100% - 20px));
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: 32px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(11, 111, 242, 0.12),
+      transparent 34%
+    ),
+    #ffffff;
+  border: 1px solid #dce8fb;
+  box-shadow: 0 28px 70px rgba(7, 31, 73, 0.12);
+  text-align: center;
+}
+
+.request-now-icon {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 14px;
+  border-radius: 30px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 20px 44px rgba(11, 111, 242, 0.22);
+}
+
+.request-now-card > span {
+  color: #0b6ff2;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.request-now-card h3 {
+  margin: 8px 0 10px;
+  color: #071f49;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900;
+}
+
+.request-now-card p {
+  max-width: 620px;
+  margin: 0 auto 18px;
+  color: #657796;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.9;
+}
+
+.request-now-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+  margin: 18px 0;
+}
+
+.request-now-summary div {
+  padding: 14px;
+  border-radius: 18px;
+  background: #f7fbff;
+  border: 1px solid #dce8fb;
+}
+
+.request-now-summary span {
+  display: block;
+  color: #657796;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.request-now-summary strong {
+  color: #071f49;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.request-now-btn {
+  width: min(420px, 100%);
+  min-height: 58px;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 20px 42px rgba(11, 111, 242, 0.22);
+}
+
+.request-status-card {
+  cursor: default !important;
+}
+
+.request-status-actions {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+@media (max-width: 760px) {
+  .request-now-card {
+    padding: 22px 14px;
+    border-radius: 26px;
+  }
+
+  .request-now-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* ================= RIDER REWARD BANNER - CLEAN BLUE STYLE ================= */
+
+.premium-rider-reward-card {
+  width: min(1280px, 92%);
+  margin: 28px auto;
+  padding: 34px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #0b2f66, #0b6ff2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 70px rgba(11, 111, 242, 0.22);
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  direction: rtl;
+}
+
+.reward-shine {
+  display: none;
+}
+
+.reward-main-content,
+.reward-visual-box {
+  position: relative;
+  z-index: 1;
+}
+
+/* content */
+
+.reward-top-line {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.reward-badge {
+  width: fit-content;
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reward-status {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.reward-status.active {
+  background: #ffffff;
+  color: #0b6ff2;
+  border-color: #ffffff;
+}
+
+.premium-rider-reward-card h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.25;
+  font-weight: 950;
+  letter-spacing: -0.8px;
+}
+
+.premium-rider-reward-card p {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 17px;
+  line-height: 1.9;
+  font-weight: 800;
+}
+
+/* progress - hidden for cleaner banner */
+
+.reward-progress-area {
+  display: none;
+}
+
+.reward-steps {
+  display: none;
+}
+
+.reward-stats-grid {
+  display: none;
+}
+
+/* left price card */
+
+.reward-visual-box {
+  min-height: 190px;
+  padding: 26px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.reward-percent-icon {
+  display: none;
+}
+
+.reward-visual-box::before {
+  content: "عرض اليوم";
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.reward-visual-box::after {
+  content: "10 ج فقط";
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.use-reward-btn {
+  width: 100%;
+  min-height: 58px;
+  border: none;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #0b6ff2;
+  font-size: 16px;
+  font-weight: 950;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  order: 3;
+}
+
+.use-reward-btn:hover,
+.use-reward-btn.active {
+  transform: translateY(-2px);
+  color: #071f49;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+/* responsive */
+
+@media (max-width: 980px) {
+  .premium-rider-reward-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .reward-top-line {
+    justify-content: center;
+  }
+
+  .premium-rider-reward-card p {
+    margin-inline: auto;
+  }
+
+  .reward-visual-box {
+    max-width: 430px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .premium-rider-reward-card {
+    width: calc(100% - 28px);
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .premium-rider-reward-card h2 {
+    font-size: 30px;
+  }
+
+  .premium-rider-reward-card p {
+    font-size: 15px;
+  }
+
+  .reward-visual-box {
+    padding: 20px;
+    min-height: 170px;
+  }
+
+  .reward-visual-box::after {
+    font-size: 32px;
+  }
+}
+
+/* ================= RIDER OFFER BANNER - UBER / DIDI STYLE ================= */
+
+.rider-offer-banner {
+  width: min(1280px, 92%);
+  margin: 26px auto;
+  padding: 26px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #082b63, #0b6ff2);
+  box-shadow: 0 22px 60px rgba(11, 111, 242, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 24px;
+  align-items: center;
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.rider-offer-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.15), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(0, 184, 255, 0.18), transparent 38%);
+  pointer-events: none;
+}
+
+.rider-offer-content,
+.rider-offer-side {
+  position: relative;
+  z-index: 1;
+}
+
+.rider-offer-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.rider-offer-badge,
+.rider-offer-status {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.rider-offer-badge {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.rider-offer-status {
+  background: #ffffff;
+  color: #0b6ff2;
+}
+
+.rider-offer-banner h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.25;
+  font-weight: 950;
+  letter-spacing: -0.7px;
+}
+
+.rider-offer-banner p {
+  max-width: 760px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: 800;
+}
+
+.rider-offer-progress {
+  width: min(560px, 100%);
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.rider-offer-progress > div:first-child {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rider-offer-progress span {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.rider-offer-progress strong {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.rider-offer-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.rider-offer-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.rider-offer-side {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  display: grid;
+  gap: 10px;
+}
+
+.rider-offer-side span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.rider-offer-side strong {
+  color: #ffffff;
+  font-size: 42px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.rider-offer-side button {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 17px;
+  background: #ffffff;
+  color: #0b6ff2;
+  font-size: 15px;
+  font-weight: 950;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.rider-offer-side button:hover {
+  transform: translateY(-2px);
+  color: #071f49;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.rider-offer-banner.ready {
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+}
+
+.rider-offer-banner.locked {
+  background: linear-gradient(135deg, #123b73, #0b6ff2);
+}
+
+@media (max-width: 900px) {
+  .rider-offer-banner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .rider-offer-top {
+    justify-content: center;
+  }
+
+  .rider-offer-banner p,
+  .rider-offer-progress {
+    margin-inline: auto;
+  }
+
+  .rider-offer-side {
+    max-width: 360px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .rider-offer-banner {
+    width: calc(100% - 28px);
+    padding: 22px 16px;
+    border-radius: 24px;
+  }
+
+  .rider-offer-banner h2 {
+    font-size: 28px;
+  }
+
+  .rider-offer-banner p {
+    font-size: 14.5px;
+  }
+
+  .rider-offer-side strong {
+    font-size: 34px;
+  }
+}
+/* =====================================================
+   RIDER OFFERS MODAL / عروض الراكب Popup
+   مضاف في آخر الملف
+===================================================== */
+
+.rider-offer-badge {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.rider-offer-badge:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #0b6ff2;
+  box-shadow: 0 14px 28px rgba(7, 31, 73, 0.16);
+}
+
+.rider-offer-status {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b6ff2;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rider-profile-modal .request-now-btn {
+  width: 100%;
+  min-height: 56px;
+  border: none;
+  border-radius: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  cursor: pointer;
+  box-shadow: 0 18px 38px rgba(11, 111, 242, 0.22);
+  transition: 0.25s ease;
+}
+
+.rider-profile-modal .request-now-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px rgba(11, 111, 242, 0.3);
+}
+
+.rider-profile-modal .rider-offer-progress {
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #f8fbff, #eef6ff);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 14px 32px rgba(0, 92, 230, 0.07);
+}
+
+.rider-profile-modal .rider-offer-progress > div:first-child {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rider-profile-modal .rider-offer-progress span {
+  color: #607087;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+.rider-profile-modal .rider-offer-progress strong {
+  color: #071f49;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.rider-profile-modal .rider-offer-track {
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: #dce8fb;
+  overflow: hidden;
+}
+
+.rider-profile-modal .rider-offer-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #0b6ff2, #00b8ff);
+  transition: width 0.35s ease;
+}
+
+.rider-profile-modal .destination-help-box {
+  width: 100% !important;
+  margin: 16px 0 0 !important;
+  padding: 16px !important;
+  border-radius: 20px !important;
+  text-align: right !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.rider-profile-modal .destination-help-box p {
+  margin: 0;
+  color: #607087;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.9;
+}
+
+/* شكل مميز للـ Popup لما يكون خاص بالعروض */
+.rider-profile-modal:has(.rider-profile-modal-hero .lucide-gift) {
+  overflow: hidden;
+}
+
+.rider-profile-modal:has(.rider-profile-modal-hero .lucide-gift)::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  top: -110px;
+  right: -90px;
+  border-radius: 999px;
+  background: rgba(11, 111, 242, 0.16);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.rider-profile-modal:has(.rider-profile-modal-hero .lucide-gift)::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  bottom: -120px;
+  left: -90px;
+  border-radius: 999px;
+  background: rgba(0, 184, 255, 0.13);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.rider-profile-modal:has(.rider-profile-modal-hero .lucide-gift) > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* دعم لو المتصفح لا يدعم :has */
+.rider-profile-modal-offers {
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .rider-offer-badge,
+  .rider-offer-status {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 12px;
+  }
+
+  .rider-profile-modal .request-now-btn {
+    min-height: 52px;
+    border-radius: 16px;
+    font-size: 14px;
+  }
+
+  .rider-profile-modal .rider-offer-progress {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .rider-profile-modal .rider-offer-progress > div:first-child {
+    display: grid;
+    gap: 6px;
+    text-align: right;
+  }
+}
+/* =====================================================
+   RIDER REWARDS OFFERS LIST POPUP
+   عروض الراكب: المتاح / القادم / المستخدم
+===================================================== */
+
+.rider-offers-modal {
+  width: min(880px, 100%);
+}
+
+.rider-offers-tabs {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.rider-offers-tabs span {
+  min-height: 46px;
+  padding: 0 12px;
+  border-radius: 16px;
+  background: #f7fbff;
+  border: 1px solid #dfe8f5;
+  color: #071f49;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rider-offers-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.rider-offers-section-title {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0b6ff2;
+}
+
+.rider-offers-section-title h3 {
+  margin: 0;
+  color: #071f49;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.rider-offer-list-card {
+  padding: 18px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #ffffff, #f7fbff);
+  border: 1px solid #dfe8f5;
+  box-shadow: 0 16px 36px rgba(0, 92, 230, 0.08);
+  display: grid;
+  gap: 11px;
+  transition: 0.25s ease;
+}
+
+.rider-offer-list-card:hover {
+  transform: translateY(-3px);
+  border-color: #a8cdf8;
+  box-shadow: 0 24px 48px rgba(0, 92, 230, 0.14);
+}
+
+.rider-offer-list-card.active {
+  background: linear-gradient(135deg, #071f49, #0b6ff2);
+  border: none;
+  color: #ffffff;
+}
+
+.rider-offer-list-card.locked {
+  background: linear-gradient(135deg, #ffffff, #f3f7fc);
+}
+
+.rider-offer-list-card.used {
+  background: linear-gradient(135deg, #fff8e7, #ffffff);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.rider-offer-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rider-offer-list-head span {
+  min-height: 34px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #eef5ff;
+  color: #0b6ff2;
+  font-size: 12px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rider-offer-list-head strong {
+  color: #071f49;
+  font-size: 24px;
+  font-weight: 950;
+}
+
+.rider-offer-list-card.active .rider-offer-list-head span {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.rider-offer-list-card.active .rider-offer-list-head strong,
+.rider-offer-list-card.active h4,
+.rider-offer-list-card.active p,
+.rider-offer-list-card.active .rider-offer-mini-progress span,
+.rider-offer-list-card.active .rider-offer-mini-progress strong {
+  color: #ffffff;
+}
+
+.rider-offer-list-card h4 {
+  margin: 0;
+  color: #071f49;
+  font-size: 20px;
+  font-weight: 950;
+  line-height: 1.5;
+}
+
+.rider-offer-list-card p {
+  margin: 0;
+  color: #657796;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.8;
+}
+
+.rider-offer-mini-progress {
+  padding: 13px;
+  border-radius: 18px;
+  background: rgba(238, 245, 255, 0.9);
+  border: 1px solid rgba(223, 232, 245, 0.9);
+}
+
+.rider-offer-list-card.active .rider-offer-mini-progress {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.rider-offer-mini-progress > div:first-child {
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rider-offer-mini-progress span {
+  color: #657796;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.rider-offer-mini-progress strong {
+  color: #071f49;
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.rider-offer-list-card button {
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 950;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.rider-offer-list-card.active button {
+  background: #ffffff;
+  color: #0b6ff2;
+}
+
+.rider-offer-list-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(7, 31, 73, 0.18);
+}
+
+.rider-offer-empty-state {
+  padding: 20px;
+  border-radius: 22px;
+  background: #f7fbff;
+  border: 1px dashed #b9d4f7;
+  color: #607087;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rider-offer-empty-state svg {
+  color: #0b6ff2;
+  flex-shrink: 0;
+}
+
+.rider-offer-empty-state p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.8;
+}
+
+@media (max-width: 760px) {
+  .rider-offers-modal {
+    width: 100%;
+  }
+
+  .rider-offers-tabs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .rider-offers-tabs span {
+    min-height: 42px;
+    font-size: 12px;
+  }
+
+  .rider-offer-list-card {
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .rider-offer-list-head strong {
+    font-size: 21px;
+  }
+
+  .rider-offer-list-card h4 {
+    font-size: 17px;
+  }
+
+  .rider-offer-list-card p {
+    font-size: 13px;
+  }
+
+  .rider-offers-section-title h3 {
+    font-size: 18px;
+  }
+}
+.rider-offers-tabs button {
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 16px;
+  border: 1px solid #dfe8f5;
+  background: #f7fbff;
+  color: #071f49;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.rider-offers-tabs button.active {
+  background: linear-gradient(135deg, #0b6ff2, #071f49);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 14px 28px rgba(11, 111, 242, 0.22);
+}
+
+.rider-offers-tabs button:hover {
+  transform: translateY(-2px);
+}
